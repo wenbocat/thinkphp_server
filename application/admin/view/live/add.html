@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">主播ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="anchorid" value="" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">标题</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" value="" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">直播分类</label>
+                            <div class="layui-input-inline">
+                                <select name="categoryid">
+                                    {volist name="categorys" id="vo"}
+                                        <option value="{$vo.id}">{$vo.title}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">封面</label>
+                            <div class="layui-input-inline">
+                                <input name="thumb" lay-verify="required" id="LAY_iconImgSrc" placeholder="图片地址" value="" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_iconImgUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="coverImgPreview">查看图片</button >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">播流地址</label>
+                            <div class="layui-input-inline">
+                                <input name="pull_url" lay-verify="required" id="LAY_videoSrc" placeholder="播流地址" value="" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_videoUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传视频
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="upVideoPreview">查看视频</button >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">屏幕方向</label>
+                            <div class="layui-input-inline">
+                                <select name="orientation" lay-verify="required">
+                                    <option value="1">横屏</option>
+                                    <option value="2">竖屏</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="div_display">
+                            <label class="layui-form-label">房间类型</label>
+                            <div class="layui-input-inline">
+                                <select name="room_type" lay-filter="room_type_sel">
+                                    <option value="0">普通房间</option>
+                                    <option value="1">私密房间</option>
+                                    <option value="2">付费房间</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="room_secret_div">
+                            <label class="layui-form-label">房间密码</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="password" value="" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="room_price_div">
+                            <label class="layui-form-label">房间价格</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="price" value="" class="layui-input" lay-verify="">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">金币/分钟</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="live-add">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script src="/assets/cos-js-sdk-v5/cos-js-sdk-v5.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/assets/vod-js-sdk-v6/vod-js-sdk-v6.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'admin', 'live'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin;
+
+        //默认选中文字类型
+        $("#room_secret_div").hide();
+        $("#room_price_div").hide();
+
+        form.on('select(room_type_sel)', function(data){
+            if (data.value == 1){
+                $("#room_secret_div").show();
+                $("#room_price_div").hide();
+            }else if (data.value == 2){
+                $("#room_secret_div").hide();
+                $("#room_price_div").show();
+            }else{
+                $("#room_secret_div").hide();
+                $("#room_price_div").hide();
+            }
+        });
+
+        form.on('submit(live-add)', function(obj){
+            if (obj.field.room_type == 1 && obj.field.password.length == 0){
+                layer.msg('私密房间必须设置密码', {icon: 5});
+                return ;
+            }
+            if (obj.field.room_type == 2 && (!parseInt(obj.field.price) || obj.field.price.length == 0)){
+                layer.msg('付费房间必须设置房间价格', {icon: 5});
+                return ;
+            }
+            //obj.field.price = parseInt(obj.field.price);
+            //提交
+            admin.req({
+                url: '/admin/live/add_post'
+                ,data: obj.field
+                ,success: function(res){
+                    if (res.code == 0){
+                        layer.msg(res.msg, {icon: 1});
+                        setTimeout(function () {
+                            window.location.reload();
+                        },1200);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

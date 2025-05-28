@@ -1,0 +1,203 @@
+/* banner样式 */
+.banner {
+    width: 100%;
+    background: url('../../img/home/bg.jpg') no-repeat;
+    background-position: center;
+    height: 621px;
+}
+
+.banner .con {
+    width: 1200px;
+    /* width: 80%; */
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+}
+
+.banner .con .left {
+    height: 100%;
+    width: 1000px;
+}
+
+.banner .con .left video {
+    height: 100%;
+    width: 1000px;
+    background-color: #000000;
+}
+
+.banner .con .right {
+    width: 230px;
+    list-style: none;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #00000033;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.banner .con .right li {
+    width: 217px;
+    height: 106px;
+    margin: 0 auto;
+    border: solid 4px transparent;
+    position: relative;
+}
+
+.banner .con .right li:hover {
+    border: solid 4px #f06e1e;
+    position: relative;
+}
+
+.banner .con .right li span {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #fefefe;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    background-color: #00000033;
+}
+
+/* contain的样式 */
+.contain {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.contain>div {
+    margin-top: 1em;
+}
+
+.contain ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.contain .one .one-header {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #ffffff; */
+}
+
+.contain .one .one-header div {
+    height: 70px;
+    line-height: 70px;
+}
+
+/* .contain .one .one-header .left span {
+    margin-left: 10px;
+} */
+
+.contain .one .one-header .right img {
+    cursor: pointer;
+}
+
+.contain .one .one-con {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contain .one .one-con li {
+    position: relative;
+}
+
+.contain .one .one-con .icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.contain .one .one-con .title {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+}
+
+.contain .comm-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contain .comm-header div {
+    height: 70px;
+    line-height: 70px;
+}
+
+.contain .body {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contain .body li {
+    width: 224px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 10px;
+}
+
+.contain .body li .msg {
+    height: 40px;
+    padding-top: 10px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+}
+
+.contain .body li .midd div {
+    margin-bottom: 5px;
+}
+
+.contain .body li .midd div:first-child {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.contain .body li .midd div:last-child,
+.contain .body li .num span {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #999999;
+}
+
+.contain .body li .num {
+    display: flex;
+    justify-content: space-around;
+    height: 10px;
+    line-height: 10px;
+    position: absolute;
+    right: 5px;
+    bottom: 3px;
+}

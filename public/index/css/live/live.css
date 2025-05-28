@@ -1,0 +1,135 @@
+.header .left li span:hover a,
+.header .left li:nth-child(2) span a {
+    color: #000000;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(2) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 0;
+}
+
+.header .left li span:hover a,
+.header .left li:nth-child(4) span a {
+    color: #ffffff;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(4) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #f06e1e;
+    border-radius: 17px;
+}
+
+/* contain当页样式 */
+.contain {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.contain .top {
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    margin: 30px 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+.contain .top li{
+    height: 60px;
+    line-height: 60px;
+    font-family: PingFang-SC-Medium;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 48px;
+    letter-spacing: 0px;
+    margin-left: 32px;
+    cursor: pointer;
+}
+.contain .top li:hover,
+.contain .top li:first-child{
+    color: orange;
+}
+
+/*  */
+
+.contain .comm-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contain .comm-header div {
+    height: 70px;
+    line-height: 70px;
+}
+
+.contain .body {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contain .body li {
+    width: 224px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 10px;
+}
+
+.contain .body li .msg {
+    height: 40px;
+    padding-top: 10px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+}
+
+.contain .body li .midd div {
+    margin-bottom: 5px;
+}
+
+.contain .body li .midd div:first-child {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.contain .body li .midd div:last-child,
+.contain .body li .num span {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #999999;
+}
+
+.contain .body li .num {
+    display: flex;
+    justify-content: space-around;
+    height: 10px;
+    line-height: 10px;
+    position: absolute;
+    right: 5px;
+    bottom: 3px;
+}

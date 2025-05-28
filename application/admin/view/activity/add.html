@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">标题</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" value="" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">类别</label>
+                            <div class="layui-input-inline">
+                                <select name="type" lay-filter="type_sel">
+                                    <option value="1">活动</option>
+                                    <option value="2">公告</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">封面</label>
+                            <div class="layui-input-inline">
+                                <input name="thumb_url" lay-verify="required" id="LAY_iconImgSrc" placeholder="图片地址" value="" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_iconImgUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="coverImgPreview">查看图片</button >
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="start_div">
+                            <label class="layui-form-label">开始时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="start_time" placeholder="活动开始时间" autocomplete="off" class="layui-input" id="start_time_input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="end_div">
+                            <label class="layui-form-label">结束时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="end_time" placeholder="活动结束时间" autocomplete="off" class="layui-input" id="end_time_input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">内容</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" class="layui-textarea" name="content" id="content" style="min-height: 300px;padding: 0;border: none;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="activity-add">确认保存</button>
+                                <button class="layui-btn layui-btn-primary" id="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script src="/assets/cos-js-sdk-v5/cos-js-sdk-v5.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/ue/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/ue/ueditor.all.min.js"> </script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'laydate', 'admin', 'activity'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,laydate = layui.laydate
+            ,admin = layui.admin;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start_time_input',
+            type: 'date',
+            format: 'yyyy-MM-dd 00:00:00'
+        });
+        laydate.render({
+            elem: '#end_time_input',
+            type: 'date',
+            format: 'yyyy-MM-dd 23:59:59'
+        });
+
+        var index = parent.layer.getFrameIndex(window.name);
+
+        $('#close').on("click",function () {
+            parent.layer.close(index);
+        });
+
+        form.on('select(type_sel)', function(data){
+            if (data.value == 1){
+                $("#start_div").show();
+                $("#end_div").show();
+            }else{
+                $("#start_div").hide();
+                $("#end_div").hide();
+            }
+        });
+
+        var ue = UE.getEditor('content');
+        form.on('submit(activity-add)', function(obj){
+            var data = obj.field;
+            data.content = ue.getContent();
+            //提交
+            admin.req({
+                url: '/admin/activity/add_post'
+                ,type: 'post'
+                ,data: data
+                ,success: function(res){
+                    if (res.code == 0){
+                        layer.msg(res.msg, {icon: 1});
+                        setTimeout(function () {
+                            window.location.reload();
+                        },1200);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

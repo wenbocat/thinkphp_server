@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">编辑协议</div>
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <input type="hidden" name="id" value="{$protocal.id}">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">标题</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" value="{$protocal.title}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">内容</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" class="layui-textarea" name="content" id="content" style="min-height: 300px;padding: 0;border: none;">{$protocal.content}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="protocal-edit">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script src="/assets/cos-js-sdk-v5/cos-js-sdk-v5.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/ue/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/ue/ueditor.all.min.js"> </script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index','form','admin','protocal'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin;
+        var ue = UE.getEditor('content');
+        form.on('submit(protocal-edit)', function(obj){
+            var data = obj.field;
+            data.content = ue.getContent();
+            console.log(data);
+            //提交
+            admin.req({
+                url: '/admin/protocal/edit_post'
+                ,data: data
+                ,type: 'post'
+                ,success: function(res){
+                    if (res.code == 0){
+                        layer.msg(res.msg, {icon: 1});
+                        setTimeout(function () {
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.window.location.reload();
+                        },1200);
+                    } else{
+                        layer.msg(res.msg, {icon: 5});
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

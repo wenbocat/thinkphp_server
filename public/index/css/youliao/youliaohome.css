@@ -1,0 +1,265 @@
+.header .left li span:hover a,
+.header .left li:nth-child(2) span a {
+    color: #000000;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(2) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 0;
+}
+
+.header .left li span:hover a,
+.header .left li:nth-child(5) span a {
+    color: #ffffff;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(5) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #f06e1e;
+    border-radius: 17px;
+}
+
+/* 该页样式 */
+.contain {
+    width: 1150px;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 720px;
+    display: flex;
+}
+
+.contain .left {
+    width: 310px;
+    height: 285px;
+    background-color: #ffffff;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.contain .left div,
+.contain .left button {
+    margin-top: 15px;
+}
+
+.contain .left .name {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.contain .left .des {
+    width: 221px;
+    height: 59px;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #999999;
+    align-self: center;
+}
+
+.contain .left button {
+    width: 82px;
+    height: 21px;
+    border: none;
+    background-color: #f06e1e;
+    font-family: MicrosoftYaHei;
+    font-size: 11px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    align-self: center;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+.contain .left img {
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+.contain .right {
+    width: 825px;
+    height: 100%;
+}
+
+.contain .right>div {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+/* 720 */
+.contain .right .row-one {
+    height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.contain .right .row-one>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.contain .right .row-one>div span:first-child{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+.contain .right .row-one>div .line {
+    display: inline-block;
+    width: 33px;
+    height: 4px;
+    background-color: transparent;
+    border-radius: 2px;
+    align-self: center;
+}
+
+.contain .right .row-one>div:first-child {
+    color: #f06e1e;
+}
+
+.contain .right .row-one>div:first-child .line {
+    background-color: #f06e1e;
+}
+
+
+.contain .right .row-two {
+    height: 589px;
+    border: 1px solid transparent;
+}
+.contain .right .row-two h2{
+    margin-left: 20px;
+    text-indent: 2em;
+    border-left: 4px solid #f06e1e;
+    font-family: MicrosoftYaHei-Bold;
+	font-size: 18px;
+	letter-spacing: 0px;
+    color: #333333;
+}
+
+.contain .right .row-three {
+    height: 45px;
+    margin-top: 15px;
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+
+
+
+.contain .right .row-two .con{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contain .right .row-two .midd {
+    height: 78px;
+    width: 369px;
+    background-color: #f0f9ff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contain .right .row-two .midd>div {
+    align-self: center;
+    margin: 0 20px;
+}
+
+.contain .right .row-two .midd .midd-one .midd-one-top {
+    margin-bottom: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+}
+
+.contain .right .row-two .midd .midd-one .midd-one-top span:first-child {
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+    border-radius: 2px;
+    border: solid 1px #47afff;
+    line-height: 18px;
+    text-align: center;
+    color: #47afff;
+}
+
+.contain .right .row-two .midd .midd-one .midd-one-bottom {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #233333;
+}
+
+.contain .right .row-two .midd .midd-two {
+    width: 81px;
+    height: 28px;
+    border-radius: 14px;
+    border: solid 1px #ff8a43;
+    line-height: 28px;
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #f06e1e;
+    cursor: pointer;
+}
+
+.contain .right .row-two p {
+    font-family: MicrosoftYaHei-Bold;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.contain .right .row-two>div:last-child {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #999999;
+}

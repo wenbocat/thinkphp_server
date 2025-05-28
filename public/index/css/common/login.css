@@ -1,0 +1,136 @@
+button{
+    outline: none;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.loginOuter {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000bf;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    display: none;
+}
+
+.login {
+    width: 400px;
+    height: 477px;
+    background-color: #ffffff;
+    position: absolute;
+    margin: auto;
+    top: 100px;
+    right: 0;
+    left: 0;
+    text-align: center;
+    border: 1px solid transparent;
+    z-index: 100;
+}
+
+.login .one {
+    margin-top: 23px;
+    position: relative;
+}
+
+.login .one i {
+    position: absolute;
+    top: 10px;
+    right: 1em;
+    cursor: pointer;
+}
+
+.login .two {
+    margin-top: 30px;
+}
+
+.login .two li {
+    margin-bottom: 19px;
+}
+
+.login .two .note {
+    text-align: right;
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(121, 121, 121, 1);
+    margin-right: 3em;
+    cursor: pointer;
+}
+
+.login .two input {
+    text-indent: 1em;
+}
+
+.login .two button {
+    cursor: pointer;
+    background: rgba(240, 110, 30, 1);
+    border-radius: 3px;
+    color: #ffffff;
+    border: none;
+}
+
+.login .two input,
+.login .two button {
+    width: 319px;
+    height: 37px;
+    font-size: 13px;
+    outline: none;
+}
+
+.login .three {
+    display: flex;
+    justify-content: space-around;
+    width: 319px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.login .three .note {
+    width: 98px;
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+}
+
+.login .three div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login .three .border {
+    display: inline-block;
+    width: 86px;
+    height: 1px;
+    border: 1px solid rgba(231, 231, 231, 1);
+    background-color: rgba(231, 231, 231, 1);
+}
+
+.login .four {
+    margin-top: 25px;
+}
+.login .four img{
+    cursor: pointer;
+}
+
+.login .four img:first-child {
+    margin-right: 40px;
+}
+
+.login .five {
+    font-size: 16px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.login .five span {
+    color: #ff9109;
+    cursor: pointer;
+}

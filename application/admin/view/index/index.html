@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>后台管理中心 - {$config_pub.site_name}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+  </head>
+  <body class="layui-layout-body">
+
+    <div id="LAY_app">
+      <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+          <!-- 头部区域 -->
+          <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect>
+              <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+              </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+              <a href="/" target="_blank" title="前台">
+                <i class="layui-icon layui-icon-website"></i>
+              </a>
+            </li>
+            <li class="layui-nav-item" lay-unselect>
+              <a href="javascript:;" layadmin-event="refresh" title="刷新">
+                <i class="layui-icon layui-icon-refresh-3"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+            <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+              <a href="javascript:;" layadmin-event="theme">
+                <i class="layui-icon layui-icon-theme"></i>
+              </a>
+            </li>
+            <li class="layui-nav-item" lay-unselect>
+              <a href="javascript:;">
+                <cite>{$userinfo.name}</cite>
+              </a>
+              <dl class="layui-nav-child">
+                <dd><a lay-href="/admin/login/editpwd">修改密码</a></dd>
+                <hr>
+                <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+              </dl>
+            </li>
+
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+              <a href="javascript:;" layadmin-event=""><i class="layui-icon layui-icon-more-vertical"></i></a>
+            </li>
+            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+              <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 侧边菜单 -->
+        <div class="layui-side layui-side-menu">
+          <div class="layui-side-scroll">
+            <div class="layui-logo" lay-href="/admin/index/home">
+              <span>{$config_pub.site_name}管理后台</span>
+            </div>
+
+            <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+              {volist name="menus" key="index" id="menu"}
+                <li data-name="home" class="layui-nav-item {if $index == 1}layui-nav-itemed{/if}">
+                  <a href="javascript:;" lay-tips="{$menu.title}" lay-direction="2">
+                    <i class="layui-icon {$menu.icon}"></i>
+                    <cite>{$menu.title}</cite>
+                  </a>
+                  <dl class="layui-nav-child">
+                    {volist name="menu.children" key="children_index" id="children"}
+                      <dd data-name="console" {if $index == 1 && $children_index == 1}class="layui-this"{/if}>
+                        <a lay-href="{$children.path}">{$children.title}</a>
+                      </dd>
+                    {/volist}
+                  </dl>
+                </li>
+              {/volist}
+<!--              <li data-name="home" class="layui-nav-item layui-nav-itemed">-->
+<!--                <a href="javascript:;" lay-tips="主页" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-home"></i>-->
+<!--                  <cite>总览</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console" class="layui-this">-->
+<!--                    <a lay-href="/admin/index/home">网站概况</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="user" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="用户管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-user"></i>-->
+<!--                  <cite>用户管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/user/index">用户列表</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/user/add">添加用户</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="anchor" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="主播管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-auz"></i>-->
+<!--                  <cite>主播管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/auth/index">身份认证</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="live" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips=直播管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-video"></i>-->
+<!--                  <cite>直播管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/live/add">新建直播</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/live/index">直播列表</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/live/category">直播分类</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/live/logs">直播记录</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="shortvideo" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips=短视频管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-play"></i>-->
+<!--                  <cite>短视频管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/shortvideo/index">短视频列表</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/shortvideo/add">添加短视频</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/shortvideo/report">举报列表</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="moment" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips=动态管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-carousel"></i>-->
+<!--                  <cite>动态管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/moment/index">动态列表</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/moment/add">添加动态</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/moment/report">举报列表</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="goods" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips=商品管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-cart"></i>-->
+<!--                  <cite>商品管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/gift/index">礼物管理</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/gold/index">金币价格</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/vip/index">VIP价格</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="goods" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips=财务管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-rmb"></i>-->
+<!--                  <cite>财务管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/order/index">充值记录</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/withdrawals/index">提现记录</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/profit/index">收支明细</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/gift/sendlog">赠礼记录</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/charge/manual">手动充值</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="level" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="等级管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-upload-circle"></i>-->
+<!--                  <cite>等级管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/level/pointlevel">经验等级</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/level/starlevel">主播星级</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="rec" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="推荐管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-rate"></i>-->
+<!--                  <cite>推荐管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/userRec/index">主播推荐</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="rec" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="公会管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-face-surprised"></i>-->
+<!--                  <cite>公会管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/guild/index">公会列表</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/guild/add">创建公会</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="rec" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="分销管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-release"></i>-->
+<!--                  <cite>分销管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/agent/index">代理列表</a>-->
+<!--                  </dd>-->
+<!--&lt;!&ndash;                  <dd data-name="console">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a lay-href="/admin/agent/add">添加代理</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </dd>&ndash;&gt;-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="ads" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="广告管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-fire"></i>-->
+<!--                  <cite>广告管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/ads/appindex">APP广告配置</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="ads" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="活动管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-theme"></i>-->
+<!--                  <cite>活动管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/activity/add">添加活动</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/activity/index">活动管理</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="ads" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="消息管理" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-notice"></i>-->
+<!--                  <cite>消息管理</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/push/index">推送管理</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/smscode/index">验证码管理</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+<!--              <li data-name="setting" class="layui-nav-item">-->
+<!--                <a href="javascript:;" lay-tips="系统设置" lay-direction="2">-->
+<!--                  <i class="layui-icon layui-icon-set-sm"></i>-->
+<!--                  <cite>系统设置</cite>-->
+<!--                </a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/setting/tag">标签配置</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/setting/role">角色管理</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/setting/indexpb">公共配置</a>-->
+<!--                  </dd>-->
+<!--                  <dd data-name="console">-->
+<!--                    <a lay-href="/admin/setting/indexpri">私密配置</a>-->
+<!--                  </dd>-->
+<!--                </dl>-->
+<!--              </li>-->
+            </ul>
+          </div>
+        </div>
+
+        <!-- 页面标签 -->
+        <div class="layadmin-pagetabs" id="LAY_app_tabs">
+          <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+          <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+          <div class="layui-icon layadmin-tabs-control layui-icon-down">
+            <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+              <li class="layui-nav-item" lay-unselect>
+                <a href="javascript:;"></a>
+                <dl class="layui-nav-child layui-anim-fadein">
+                  <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                  <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                  <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+          <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+            <ul class="layui-tab-title" id="LAY_app_tabsheader">
+              <li lay-id="/admin/index/home" lay-attr="/admin/index/home" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- 主体内容 -->
+        <div class="layui-body" id="LAY_app_body">
+          <div class="layadmin-tabsbody-item layui-show">
+            <iframe src="/admin/index/home" frameborder="0" class="layadmin-iframe"></iframe>
+          </div>
+        </div>
+
+        <!-- 辅助元素，一般用于移动设备下遮罩 -->
+        <div class="layadmin-body-shade" layadmin-event="shade"></div>
+      </div>
+    </div>
+
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script>
+    layui.config({
+      base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+      index: 'lib/index' //主入口模块
+    }).use('index');
+    </script>
+  </body>
+</html>
+
+

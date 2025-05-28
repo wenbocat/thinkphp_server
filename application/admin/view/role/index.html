@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <input type="hidden" id="pid" value="{$pid}">
+        <div class="layui-card-body">
+            <div style="padding-bottom: 10px;">
+                <button class="layui-btn layuiadmin-btn-role" data-type="add">添加</button>
+                <button class="layui-btn layuiadmin-btn-role" data-type="save">保存</button>
+            </div>
+
+            <table id="LAY-auth-manage" lay-filter="LAY-auth-manage"></table>
+
+            <script type="text/html" id="table-list-admin-auth-sort">
+                <input type="text" name="sort" value="{{d.sort}}" lay-data="{{d.id}}" class="layui-input" lay-verify="required" placeholder="" style="height: 28px;">
+            </script>
+
+            <script type="text/html" id="table-admin-auth-handler">
+                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+                {{#  if(d.status != 1){ }}
+                <a class="layui-btn layui-btn-xs" lay-event="check"><i class="layui-icon layui-icon-edit"></i>开启</a>
+                {{#  }else{ }}
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="check"><i class="layui-icon layui-icon-edit"></i>关闭</a>
+                {{#  } }}
+                {{#  if(d.parentid == 0){ }}
+                <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="sub"><i class="layui-icon layui-icon-edit"></i>下级权限</a>
+                {{#  } }}
+            </script>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'role', 'table', 'admin'], function(){
+        var $ = layui.$
+            ,admin = layui.admin
+            ,table = layui.table;
+
+        //事件
+        var active = {
+            save: function(){
+                var inputs = $("input[name='sort']");
+                var data = new Array();
+                $.each(inputs,function (index,val) {
+                    data.push({'id':$(val).attr('lay-data'),'sort':$(val).val()});
+                });
+                admin.req({
+                    url: '/admin/role/auth_sort'
+                    ,data: {"sorts":data}
+                    ,type:'post'
+                    ,success(res){
+                        if (res.code == 0){
+                            table.reload("LAY-auth-manage");
+                            layer.msg(res.msg, {icon:1});
+                        } else{
+                            layer.msg(res.msg, {icon:5});
+                        }
+                    }
+                });
+            },
+            add: function () {
+                layer.open({
+                    type: 2
+                    ,title: '添加权限'
+                    ,content: '/admin/role/add_auth?pid='+$('#pid').val()
+                    ,area: ['650px', '500px']
+                });
+            }
+        };
+
+        $('.layui-btn.layuiadmin-btn-role').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</body>
+</html>

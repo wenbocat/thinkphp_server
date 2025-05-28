@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">添加动态</div>
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发帖用户ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="uid" value="" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">类别</label>
+                            <div class="layui-input-inline">
+                                <select name="type" lay-filter="type_sel">
+                                    <option value="1">文字</option>
+                                    <option value="2">图片</option>
+                                    <option value="3">视频</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">标题</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" class="layui-textarea" name="title"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="div_img">
+                            <label class="layui-form-label">图片</label>
+                            <div class="layui-input-inline" style="width: 800px;">
+                                <input name="image_url" lay-verify="" id="LAY_imageSrc" placeholder="图片地址" value="" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_imageUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="imagePreview" id="LAY_imagePreview">查看图片</button >
+                            </div>
+                            <input type="hidden" name="blur_image_url" id="imgSrcBlur" value="">
+                        </div>
+                        <div class="layui-form-item" id="div_video">
+                            <label class="layui-form-label">视频</label>
+                            <div class="layui-input-inline" style="width: 800px;">
+                                <input name="video_url" lay-verify="" id="LAY_videoSrc" placeholder="视频地址" value="" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_videoUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传视频
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="upVideoPreview" id="LAY_videoPreview">查看视频</button >
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="div_display">
+                            <label class="layui-form-label">展示类别</label>
+                            <div class="layui-input-inline">
+                                <select name="single_display_type">
+                                    <option value="">单图或视频模式请选择</option>
+                                    <option value="1">横向</option>
+                                    <option value="2">纵向</option>
+                                    <option value="3">方形</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="div_price">
+                            <label class="layui-form-label">解锁价格</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="unlock_price" value="0" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="moment-add">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script src="/assets/cos-js-sdk-v5/cos-js-sdk-v5.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/assets/vod-js-sdk-v6/vod-js-sdk-v6.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'moment', 'form', 'admin'],function () {
+        var $ = layui.$
+            ,form = layui.form;
+
+        //默认选中文字类型
+        $("#div_img").hide();
+        $("#div_video").hide();
+        $("#div_display").hide();
+        $("#div_price").hide();
+
+        form.on('select(type_sel)', function(data){
+            if (data.value == 1){
+                $("#div_img").hide();
+                $("#div_video").hide();
+                $("#div_display").hide();
+                $("#div_price").hide();
+            }else{
+                $("#div_img").show();
+                $("#div_video").show();
+                $("#div_display").show();
+                $("#div_price").show();
+            }
+        });
+    });
+</script>
+</body>
+</html>

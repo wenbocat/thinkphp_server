@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">编辑公会信息</div>
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公会名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="name" value="{$guild.name}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公会徽章</label>
+                            <div class="layui-input-inline">
+                                <input name="icon" lay-verify="required" id="LAY_avatarSrc" placeholder="图片地址" value="{$guild.icon}" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_avatarUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片</button >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公会简介</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="content" value="{$guild.content}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝账户</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alipay_account" value="{$guild.alipay_account}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alipay_name" value="{$guild.alipay_name}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="guild-edit-submit">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script src="/assets/cos-js-sdk-v5/cos-js-sdk-v5.min.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'admin', 'upload'],function () {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin
+            ,upload = layui.upload;
+        form.on('submit(guild-edit-submit)', function(obj){
+            var data = obj.field;
+            //提交
+            admin.req({
+                url: '/guild/index/edit_post'
+                ,data: data
+                ,success: function(res){
+                    if (res.code == 0){
+                        layer.msg(res.msg, {icon: 1});
+                        setTimeout(function () {
+                            window.location.reload();
+                        },1200);
+                    } else{
+                        layer.msg(res.msg, {icon: 5});
+                    }
+                }
+            });
+            return false;
+        });
+
+        //上传头像
+        var avatarSrc = $('#LAY_avatarSrc');
+        upload.render({
+            url: '/admin/index/noOperation'
+            ,elem: '#LAY_avatarUpload'
+            ,auto: true
+            ,choose: function (obj) {
+                layer.load();
+                var choosefile;
+                obj.preview(function(index, file, result) {
+                    choosefile = file;
+                });
+                admin.req({
+                    url: '/admin/user/signForCos'
+                    ,success: function(res){
+                        if(res.code == 0){
+                            var cos = new COS({
+                                getAuthorization: function (options, callback) {
+                                    var credentials = res.data.credentials;
+                                    callback({
+                                        TmpSecretId: credentials.tmpSecretId,
+                                        TmpSecretKey: credentials.tmpSecretKey,
+                                        XCosSecurityToken: credentials.sessionToken,
+                                        ExpiredTime: res.data.expiredTime
+                                    });
+                                }
+                            });
+                            cos.putObject({
+                                Bucket: res.data.bucket,
+                                Region: res.data.region,
+                                Key: 'images/' + res.data.filename + choosefile.name,
+                                Body: choosefile,
+                            }, function (err, data) {
+                                layer.closeAll('loading');
+                                if (err){
+                                    layer.msg("上传失败", {icon: 5});
+                                } else {
+                                    if (data.statusCode == 200) {
+                                        avatarSrc.val("https://" + data.Location);
+                                    } else {
+                                        layer.msg("图片上传失败", {icon: 5});
+                                    }
+                                }
+                            });
+                        } else {
+                            layer.closeAll('loading');
+                            layer.msg(res.msg, {icon: 5});
+                        }
+                    }
+                })
+            }
+        });
+
+        //查看头像
+        admin.events.avartatPreview = function(othis){
+            var src = avatarSrc.val();
+            layer.photos({
+                photos: {
+                    "title": "查看头像" //相册标题
+                    ,"data": [{
+                        "src": src //原图地址
+                    }]
+                }
+                ,shade: 0.01
+                ,closeBtn: 1
+                ,anim: 5
+            });
+        };
+    });
+</script>
+</body>
+</html>

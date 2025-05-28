@@ -1,0 +1,153 @@
+.header .left li span:hover a,
+.header .left li:nth-child(2) span a {
+    color: #000000;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(2) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 0;
+}
+
+.header .left li span:hover a,
+.header .left li:nth-child(3) span a {
+    color: #ffffff;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(3) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #f06e1e;
+    border-radius: 17px;
+}
+
+
+/* 该页样式 */
+
+
+i {
+    /* 去除i样式的斜体 */
+    font-style: normal;
+}
+
+.contain {
+    height: 400px;
+    width: 950px;
+    margin: 0 auto;
+}
+
+.contain .top {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 18px 0;
+}
+
+.contain .top li {
+    width: 68px;
+    height: 27px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-right: 20px;
+    font-size: 12px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    line-height: 27px;
+    cursor: pointer;
+}
+
+.contain .top li:hover {
+    color: #ffffff;
+    background-color: #F06E1E;
+}
+
+.contain .top li:first-child {
+    color: #ffffff;
+    background-color: #F06E1E;
+}
+
+.contain .body {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contain .body li {
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+}
+
+.contain .body span i {
+    margin: 0 10px;
+}
+
+.contain .body span .spec,
+.contain .body span .animate {
+    color: #F06E1E;
+    cursor: pointer;
+}
+
+.contain .body span .video {
+    color: #6fceed;
+    cursor: pointer;
+}
+
+.contain .body span {
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.contain .body span:first-child img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+}
+
+.contain .body li:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.contain .body li:nth-child(even) {
+    background-color: rgba(247, 249, 250, 1);
+}
+
+.contain .body span:nth-child(4) {
+    width: 397px;
+}
+
+.contain .body span:first-child {
+    position: relative;
+    width: 131px;
+}
+
+.contain .body span:last-child {
+    width: 51;
+}
+
+.contain .body span:nth-child(2),
+.contain .body span:nth-child(3),
+.contain .body span:nth-child(5),
+.contain .body span:nth-child(6) {
+    width: 57px;
+}
+
+.contain .body span:nth-child(7) {
+    width: 131px;
+}

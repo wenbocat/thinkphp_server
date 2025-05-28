@@ -1,0 +1,101 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">钻石数量</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="diamond" value="" class="layui-input" lay-verify="required|number" id="diamond_input" placeholder="可提现钻石：{$guild->diamond}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">到账金额</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="cash" value="0" class="layui-input" lay-verify="required" id="cash_input" readonly>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">钻石人民币汇率：{$exchange_rate} : 1</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝账户</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="alipay_account" value="{$guild.alipay_account}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="alipay_name" value="{$guild.alipay_name}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="save">确定</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'admin', 'login'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin;
+
+        var exchange_rate = {$exchange_rate};
+        $('#diamond_input').bind('input propertychange', function() {
+            var count = parseInt($(this).val());
+            if (!count){
+                count = 0;
+            }
+            $("#cash_input").val(count*exchange_rate/100);
+        });
+
+
+        form.on('submit(save)', function(obj){
+            //提交
+            admin.req({
+                url: '/guild/finance/withdraw_post'
+                ,data: obj.field
+                ,success: function(res){
+                    if (res.code == 0){
+                        layer.msg(res.msg, {icon: 1});
+                        setTimeout(function () {
+                            window.location.reload();
+                        },1200);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

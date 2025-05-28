@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/template.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md2">
+            <div class="layadmin-homepage-panel layadmin-homepage-shadow">
+                <div class="layui-card text-center">
+                    <div class="layui-card-body">
+                        <div class="layadmin-homepage-pad-ver">
+                            <img class="layadmin-homepage-pad-img" src="{$guild.icon}" width="96" height="96">
+                        </div>
+                        <h4 class="layadmin-homepage-font">{$guild.name}</h4>
+                        <p class="layadmin-homepage-min-font">{$guild.mobile}</p>
+                        <button class="layui-btn layui-btn-fluid"><a lay-href="/guild/Index/edit" style="color: white">编辑信息</a></button>
+                        <br/>
+                    </div>
+                </div>
+                <p class="layadmin-homepage-about">
+                    公会简介
+                </p>
+                <ul class="layadmin-homepage-list-group">
+                    <li class="list-group-item"></li>
+                </ul>
+                <div class="layadmin-homepage-pad-hor">
+                    <mdall>{$guild.content}</mdall>
+                </div>
+                <p class="layadmin-homepage-about">
+                </p>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">公会统计</div>
+                <div class="layui-card-body">
+                    <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;">
+                        <div carousel-item="">
+                            <ul class="layui-row layui-col-space10 layui-this">
+                                <li class="layui-col-xs6">
+                                    <a lay-href="javascript:void(0);" class="layadmin-backlog-body">
+                                        <h3>分红比例</h3>
+                                        <p><cite>{$guild.sharing_ratio}%</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-xs6">
+                                    <a lay-href="javascript:void(0);" class="layadmin-backlog-body">
+                                        <h3>成员数量</h3>
+                                        <p><cite>{$guild.member_count}</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-xs6">
+                                    <a lay-href="javascript:void(0);" class="layadmin-backlog-body">
+                                        <h3>可用钻石</h3>
+                                        <p><cite>{$guild.diamond}</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-xs6">
+                                    <a href="javascript:;" class="layadmin-backlog-body">
+                                        <h3>累计收益钻石</h3>
+                                        <p><cite>{$guild.diamond_total}</cite></p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    公会信息
+                    <a lay-href="/guild/finance/withdraw" class="layui-a-tips" style="color: #009688">申请提现</a>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space10">
+                        <div class="layui-col-xs12 layui-col-sm4">
+                            <div class="layuiadmin-card-text">
+                                <div class="layui-text-top"><i class="layui-icon layui-icon-form"></i>支付宝账户</div>
+                                <p class="layui-text-center">{$guild.alipay_account}</p>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm4">
+                            <div class="layuiadmin-card-text">
+                                <div class="layui-text-top"><i class="layui-icon layui-icon-form"></i>支付宝姓名</div>
+                                <p class="layui-text-center">{$guild.alipay_name}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+</script>
+</body>
+</html>

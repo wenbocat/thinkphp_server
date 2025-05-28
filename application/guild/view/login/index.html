@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>登入 - {$config_pub.site_name}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- Favicon icon -->
+    <link href="/modules/admin/css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+
+<body class="h-100" style="font-family: Microsoft YaHei,PingFang SC;">
+    <div class="center">
+        <div class="head">
+            <img src="/modules/admin/images/logo_login.png" alt="" class="logo">
+            <i></i>
+            <div class="title">
+                <h4>- {$config_pub.site_name} -</h4>
+                <p>欢迎登录公会后台管理系统</p>
+            </div>
+        </div>
+        <div class="mt-5 mb-5 login-input layui-form">
+            <div class="input">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAe1BMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////NgkbwAAAAKHRSTlMAYHD94PASBNqSgEf31si4onhQLiXpwKxzWhwYCObQrqmahoRoPDs0TUJY/wAAAKdJREFUKM+10NcOwiAYhmEotED33u713f8VWhtaI+iR+h7wkzwhAci3BfsoPnrv5AQwoCpsyVEFwlOQwqIEwTLMNuE8zsgsct15UPg/Ih7OV3PgWNSATquIcbXoxsK2vCSoiZWX4hGjxlf1WcygY3XbPw80DIhUVwxD0Sk56W45moJnJVkrfY5U7yVG8tIIuTwJxAj8M0UrUSNsNR1gpTSJ3DHKBflDd5tjD6VygN+SAAAAAElFTkSuQmCC" alt="">
+                <input type="text" name="mobile" class="form-control" placeholder="请输入账号" id="LAY-user-login-mobile" lay-verify="mobile">
+            </div>
+            <div class="input">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAhFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8g2+bRAAAAK3RSTlMA+/bBQuTxvdzQyo01JBYNBurPfmdiUUcSCdalnJF4bVxXLSACsp6Ac0w8vLTLCAAAANRJREFUKM+10NduAyEQheEZ6vb1dvcSO/W8//sFCbElsa8s/xfA6JNAgp4tl5Bv92DdCMTgtKBFm6y1jOpCvQbLz++JTwwgOZXuuGoTBrgLJKq0u043D0ejwwBJy2o8JHmX1FY9ICVERpTwnH7qzItyW2zmpNioIBTpQGbrljOLhr1seHzBIndrz/BCA9JALQ7k+hK9n3dQ4xdqnv94ztFtHC6Iy4kszjS1hx0thaVZq3fEV386QBe0sA+IY0m3oUaU0586A5FUwG5N/yqaiPU+o9f1CzrYDj5VyTU8AAAAAElFTkSuQmCC" alt="">
+                <input type="password" name="password" class="form-control" placeholder="请输入密码" id="LAY-user-login-password" lay-verify="password">
+            </div>
+            <div class="input">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAUVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////8IN+deAAAAGnRSTlMA4PC+fx7jw2HA99zIRzItJRgOB9jMqXpWT7LNbnYAAAB8SURBVCjPtc9LDoMwDEVRP4ckFCjfft/+F1q1pR3Yygi4k0Q6SmTL1s6h4eW+iK8iNZHX2b+hPkTGzJujzOf7mBNHIwvT79/aUOTpe6lZbaa+AxIbfFIq0PX/4Vx5JVBMhKUYiwQUSXVnatsiTZOj8l6BrrDSEGAKgxzQCxAFCgEBS1gpAAAAAElFTkSuQmCC" alt="">
+                <input type="text" name="vercode" class="form-control" placeholder="请输入验证码" id="LAY-user-login-vercode" lay-verify="required">
+                <img src="{:captcha_src()}" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
+            </div>
+            <button class="submit-btn layui-btn" lay-submit lay-filter="LAY-user-login-submit" id="submit">立即登录</button>
+        </div>
+    </div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'guild-login']);
+</script>
+</body>
+</html>
+
+
+
+
+
+

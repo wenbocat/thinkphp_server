@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">站点配置</li>
+                <li>APP版本配置</li>
+                <li>分享配置</li>
+                <li>直播间配置</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">站点名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="site_name" value="{$config_pub.site_name}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">站点域名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="site_domain" value="{$config_pub.site_domain}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">版权信息</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="copyright" value="{$config_pub.copyright}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客服邮箱</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="service_email" value="{$config_pub.service_email}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客服电话</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="service_phone" value="{$config_pub.service_phone}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客服QQ</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="service_qq" value="{$config_pub.service_qq}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpub-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">安卓版本号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="version_android" value="{$config_pub.version_android}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">安卓下载地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="dl_android" value="{$config_pub.dl_android}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">安卓更新说明</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="update_info_android" value="{$config_pub.update_info_android}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">苹果版本号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="version_ios" value="{$config_pub.version_ios}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">苹果下载地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="dl_ios" value="{$config_pub.dl_ios}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">苹果更新说明</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="update_info_ios" value="{$config_pub.update_info_ios}" class="layui-input" placeholder="" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载二维码</label>
+                            <div class="layui-input-inline">
+                                <input name="dl_qrcode" lay-verify="required" id="LAY_qrcodeSrc" placeholder="图片地址" value="{$config_pub.dl_qrcode}" class="layui-input">
+                            </div>
+                            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                <button type="button" class="layui-btn layui-btn-primary" id="LAY_qrcodeUpload">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                                <button class="layui-btn layui-btn-primary" layadmin-event="qrcodePreview">查看图片</button >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载页地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="dl_web_url" value="{$config_pub.dl_web_url}" class="layui-input" placeholder="http:// 或 https:// 开头，/结尾" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpub-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">直播间分享链接</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="share_live_url" value="{$config_pub.share_live_url}" class="layui-input" lay-verify="required" placeholder="http:// 或 https:// 开头，/结尾">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">短视频分享链接</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="share_shortvideo_url" value="{$config_pub.share_shortvideo_url}" class="layui-input" lay-verify="required" placeholder="http:// 或 https:// 开头，/结尾">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">动态分享链接</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="share_moment_url" value="{$config_pub.share_moment_url}" class="layui-input" lay-verify="required" placeholder="http:// 或 https:// 开头，/结尾">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpub-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">直播间公告</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="room_notice" value="{$config_pub.room_notice}" class="layui-input" lay-verify="required" placeholder="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpub-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/cos-js-sdk-v5/cos-js-sdk-v5.js"></script>
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'setting']);
+</script>
+</body>
+</html>

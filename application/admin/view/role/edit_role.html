@@ -1,0 +1,132 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <input name="id" type="hidden" value="{$role.id}">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="name" value="{$role.name}" class="layui-input" lay-verify="required" placeholder="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">角色说明</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="remark" value="{$role.remark}" class="layui-input" lay-verify="required" placeholder="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">仅限阅览</label>
+                            <div class="layui-input-block">
+                                <select name="is_visitor" lay-verify="required">
+                                    <option value="0" {if $role.is_visitor == 0}selected{/if}>否</option>
+                                    <option value="1" {if $role.is_visitor == 1}selected{/if}>是</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">权限</label>
+                            <div class="layui-input-block" id="auth_tree">
+
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="role-edit">确认保存</button>
+                                <button class="layui-btn layui-btn-primary" id="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'tree', 'admin', 'role'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin
+            ,tree = layui.tree;
+
+        var data = {$data|raw};
+        tree.render({
+            elem: '#auth_tree'
+            ,data: data
+            ,showCheckbox: true  //是否显示复选框
+            ,id: 'tree'
+            ,isJump: false //是否允许点击节点时弹出新窗口跳转
+            ,click: function(obj){
+            }
+        });
+
+        var index = parent.layer.getFrameIndex(window.name);
+
+        $('#close').on("click",function () {
+            parent.layer.close(index);
+        });
+
+        form.on('submit(role-edit)', function(obj){
+            var checkedData = tree.getChecked('tree'); //获取选中节点的数据
+            console.log(checkedData);
+            if (checkedData.count == 0){
+                layer.msg('请先勾选权限', {icon:5});
+                return ;
+            }
+            var authids = new Array();
+            $.each(checkedData,function (index,value) {
+                authids.push(value.id);
+                $.each(value.children,function (index,children) {
+                    authids.push(children.id);
+                });
+            });
+            obj.field.authids = authids;
+            //提交
+            var loading = layer.load(2);
+            admin.req({
+                url: '/admin/role/edit_role_post'
+                ,data: obj.field
+                ,type: 'post'
+                ,success: function(res){
+                    layer.close(loading);
+                    if (res.code == 0){
+                        parent.layer.close(index);
+                        parent.layer.msg(res.msg, {icon: 1});
+                        parent.layui.table.reload('LAY-role-manage');
+                    }
+                }
+                ,error: function (e) {
+                    layer.close(loading);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

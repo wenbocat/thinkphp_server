@@ -1,0 +1,453 @@
+.header .left li span:hover a,
+.header .left li:nth-child(2) span a {
+    color: #000000;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(2) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 0;
+}
+
+.header .left li span:hover a,
+.header .left li:nth-child(4) span a {
+    color: #ffffff;
+}
+
+.header .left li span:hover,
+.header .left li:nth-child(4) span {
+    display: inline-block;
+    line-height: 35px;
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    background-color: #f06e1e;
+    border-radius: 17px;
+}
+
+
+/* 该页样式 */
+.contain {
+    width: 1400px;
+    height: 800px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+}
+
+.contain .contain-left {
+    width: 1120px;
+    height: 100%;
+}
+
+.contain .contain-left-header {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.contain .contain-left-header .one {
+    display: flex;
+    height: 100%;
+}
+
+.contain .contain-left-header .one .title {
+    font-family: MicrosoftYaHei;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.contain .contain-left-header .one .other {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #909090;
+}
+
+.contain .contain-left-header .one .other span {
+    margin: 0 10px;
+}
+
+.contain .contain-left-header .one .other i {
+    font-style: normal;
+    color: #f06e1e;
+}
+
+.contain .contain-left-header .one>img {
+    width: 64px;
+    height: 64px;
+    margin: 0 20px;
+    margin-top: 18px;
+}
+
+.contain .contain-left-header .one .msg {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.contain .contain-left-header .two {
+    display: flex;
+    height: 100%;
+    line-height: 100px;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #909090;
+    margin-right: 15em;
+}
+
+.contain .contain-left-header .two li {
+    margin-left: 10px;
+}
+
+.contain .contain-left-header .two li img {
+    width: 17px;
+    height: 17px;
+}
+
+.contain .contain-left-header .btn {
+    position: absolute;
+    margin: auto;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    height: 30px;
+    width: 160px;
+    text-align: center;
+    line-height: 30px;
+    display: flex;
+    border: 3px solid #f06e1e;
+    border-radius: 10px;
+}
+
+.contain .contain-left-header .btn div {
+    width: 49%;
+    text-align: center;
+    color: #909090;
+}
+
+.contain .contain-left-header .btn div:first-child {
+    background-color: #f06e1e;
+    color: #ffffff;
+}
+
+.contain .contain-left-body {
+    width: 100%;
+    height: 680px;
+}
+
+.contain .contain-left-body video {
+    background-color: #000000;
+    height: 600px;
+    width: 100%;
+}
+
+.contain .contain-left-body .tool {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contain .contain-left-body .tool ul {
+    list-style: none;
+    display: flex;
+    height: 100%;
+    line-height: 80px;
+}
+
+.contain .contain-left-body .tool .left li {
+    margin-left: 10px;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    cursor: pointer;
+}
+
+.contain .contain-left-body .tool .left li i {
+    font-style: normal;
+    color: rgb(255, 123, 0);
+}
+
+.contain .contain-left-body .tool .left li:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contain .contain-left-body .tool .left li div {
+    width: 66px;
+    height: 30px;
+    background-color: #f06e1e;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 30px;
+    color: #ffffff;
+}
+
+.contain .contain-left-body .tool .right li div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contain .contain-left-body .tool .right li {
+    margin-right: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.contain .contain-left-body .tool .right li div {
+    height: 35px;
+    width: 35px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    position: relative;
+}
+
+.contain .contain-left-body .tool .right .btn div {
+    width: 17px;
+}
+
+.contain .contain-left-body .tool .right li div img {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.contain .contain-left-body .tool .right li input {
+    width: 50px;
+    text-align: center;
+    outline: none;
+}
+
+
+.contain .contain-left-body .tool .right li .send {
+    width: 60px;
+    height: 30px;
+    background-color: #f06e1e;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.contain .contain-right {
+    width: 280px;
+    margin-left: 20px;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.contain .contain-right>div {
+    width: 100%;
+}
+
+.contain .contain-right .one {
+    height: 37px;
+    background-color: #f4fcff;
+    line-height: 37px;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #000000;
+}
+
+.contain .contain-right .one img {
+    height: 13px;
+    width: 13px;
+    margin: 0 10px;
+}
+
+.contain .contain-right .two {
+    height: 163px;
+    background-color: #ffffff;
+}
+
+.contain .contain-right .two .two-panel {
+    height: 30px;
+    text-align: center;
+    display: flex;
+    font-family: MicrosoftYaHei;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #666666;
+    line-height: 30px;
+    background-color: lightgray;
+}
+
+.contain .contain-right .two .two-panel div {
+    width: 50%;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid transparent;
+}
+
+
+.contain .contain-right .two .two-panel div:first-child {
+    background-color: #ffffff;
+    border-top: 2px solid orange;
+}
+
+.contain .contain-right .two .two-body {
+    height: 133px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-around;
+}
+
+.contain .contain-right .two .two-body li {
+    height: 100%;
+    width: 30%;
+}
+
+.contain .contain-right .two .two-body li img {
+    width: 50px;
+    height: 50px;
+}
+
+.contain .contain-right .two .two-body li:first-child {
+    background: url('../../img/room/no2.png') no-repeat;
+    background-position: center;
+
+}
+
+/*.contain .contain-right .two .two-body li:nth-child(2) {*/
+    /*background: url('../../img/room/no1.png') no-repeat;*/
+    /*background-position: center;*/
+
+/*}*/
+
+/*.contain .contain-right .two .two-body li:last-child {*/
+    /*background: url('../../img/room/no3.png') no-repeat;*/
+    /*background-position: center;*/
+/*}*/
+
+.contain .contain-right .three {
+    height: 530px;
+}
+
+.contain .contain-right .three p {
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #f06e1e;
+    margin: 0 auto;
+    padding: 10px;
+}
+.contain .contain-right .three div img {
+    width: 30px;
+    height: 20px;
+    margin: 0 10px;
+}
+
+.contain .contain-right .three div .name {
+    color: lightgray;
+    margin: 0 10px;
+}
+
+.contain .contain-right .three div span {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+}
+
+.contain .contain-right .three div {
+    width: 100%;
+    display: flex;
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+.contain .contain-right  .four{
+    height: 72px;
+border-top: 1px solid lightgray;
+}
+
+
+
+.contain .contain-right  .four {
+    height: 70px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contain .contain-right  .four div {
+    display: flex;
+    justify-content: center;
+}
+
+.contain .contain-right  .four button {
+    border: none;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    width: 58px;
+    background-color: #ff7100;
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+}
+
+.contain .contain-right  .four input {
+    background-color: #f4f4f4;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    height: 28px;
+    text-indent: 10px;
+    font-size: 15px;
+    border: solid 1px #dedede;
+}

@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">金币数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="gold" value="" class="layui-input" lay-verify="required" placeholder="请输入整数">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">赠送数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="gold_added" value="0" class="layui-input" lay-verify="required" placeholder="请输入整数">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">价格/元</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="price" value="" class="layui-input" lay-verify="required" placeholder="请输入整数">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="gold-add">确认保存</button>
+                                <button class="layui-btn layui-btn-primary" id="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'admin', 'gold'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin;
+        var index = parent.layer.getFrameIndex(window.name);
+
+        $('#close').on("click",function () {
+            parent.layer.close(index);
+        });
+
+        form.on('submit(gold-add)', function(obj){
+            //提交
+            admin.req({
+                url: '/admin/gold/add_post'
+                ,data: obj.field
+                ,success: function(res){
+                    if (res.code == 0){
+                        parent.layer.close(index);
+                        parent.layer.msg(res.msg, {icon: 1});
+                        parent.layui.table.reload('LAY-gold-manage');
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

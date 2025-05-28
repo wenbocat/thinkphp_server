@@ -1,0 +1,99 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <input type="hidden" name="id" value="{$orderinfo.id}">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">商户单号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="order_no" value="{$orderinfo.order_no}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付渠道</label>
+                            <div class="layui-input-block">
+                                <select name="pay_channel">
+                                    <option value="1">微信支付</option>
+                                    <option value="2">支付宝</option>
+                                    <option value="4">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付单号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="out_trade_no" value="" class="layui-input" lay-verify="required" placeholder="请填写第三方支付平台订单号">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付金额/元</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="pay_amount" value="" class="layui-input" lay-verify="required|number" placeholder="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="order-edit">确认保存</button>
+                                <button class="layui-btn layui-btn-primary" id="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'admin', 'shop'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin;
+        var index = parent.layer.getFrameIndex(window.name);
+
+        $('#close').on("click",function () {
+            parent.layer.close(index);
+        });
+
+        form.on('submit(order-edit)', function(obj){
+            //提交
+            admin.req({
+                url: '/admin/shop/order_edit_post'
+                ,data: obj.field
+                ,success: function(res){
+                    if (res.code == 0){
+                        parent.layer.close(index);
+                        parent.layer.msg(res.msg, {icon: 1});
+                        parent.layui.table.reload('LAY-order-manage');
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

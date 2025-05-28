@@ -1,0 +1,134 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" pad15="">
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <input type="hidden" name="id" value="{$withdrawalsinfo.id}">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">收款支付宝账号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alipay_account" value="{$withdrawalsinfo.alipay_account}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">收款支付宝姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alipay_name" value="{$withdrawalsinfo.alipay_name}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">提现金额/元</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cash" value="{$withdrawalsinfo.cash}" class="layui-input" lay-verify="required" readonly>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">转账单号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="trade_no" value="" class="layui-input" lay-verify="" placeholder="请填写支付宝转账单号" id="trade_no">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block text-center">
+                                <button class="layui-btn" lay-submit="" lay-filter="withdrawals-confirm">确认</button>
+                                <button class="layui-btn layui-btn-warm" lay-submit="" lay-filter="withdrawals-refuse">拒绝(返还钻石)</button>
+                                <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="withdrawals-abnormal">异常单(扣除钻石)</button>
+                                <button class="layui-btn layui-btn-primary" id="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'admin', 'guild'], function() {
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin;
+        var index = parent.layer.getFrameIndex(window.name);
+
+        $('#close').on("click",function () {
+            parent.layer.close(index);
+        });
+
+        form.on('submit(withdrawals-confirm)', function(obj){
+            if (!$("#trade_no").val()) {
+                return;
+            }
+            //提交
+            admin.req({
+                url: '/admin/guild/withdraw_edit_post'
+                ,data: obj.field
+                ,success: function(res){
+                    if (res.code == 0){
+                        parent.layer.close(index);
+                        parent.layer.msg(res.msg, {icon: 1});
+                        parent.layui.table.reload('LAY-withdrawals-manage');
+                    }
+                }
+            });
+            return false;
+        });
+        form.on('submit(withdrawals-refuse)', function(obj){
+            layer.confirm('拒绝提现申请后将返还钻石至公会账户', function(index) {
+                //提交
+                admin.req({
+                    url: '/admin/guild/withdraw_edit_refuse'
+                    , data: obj.field
+                    , success: function (res) {
+                        if (res.code == 0) {
+                            parent.layer.close(index);
+                            parent.layer.msg(res.msg, {icon: 1});
+                            parent.layui.table.reload('LAY-withdrawals-manage');
+                        }
+                    }
+                });
+            });
+            return false;
+        });
+        form.on('submit(withdrawals-abnormal)', function(obj){
+            layer.confirm('异常提现申请不会返还钻石至公会账户', function(index) {
+                //提交
+                admin.req({
+                    url: '/admin/guild/withdraw_edit_abnormal'
+                    , data: obj.field
+                    , success: function (res) {
+                        if (res.code == 0) {
+                            parent.layer.close(index);
+                            parent.layer.msg(res.msg, {icon: 1});
+                            parent.layui.table.reload('LAY-withdrawals-manage');
+                        }
+                    }
+                });
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

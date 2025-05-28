@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">基本设置</li>
+                <li>登录配置</li>
+                <li>腾讯云服务</li>
+                <li>直播SDK配置</li>
+                <li>美颜配置</li>
+                <li>分享配置</li>
+                <li>推送配置</li>
+                <li>支付配置</li>
+                <li>提现配置</li>
+                <li>分销配置</li>
+                <li>商城配置</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">短视频审核开关</label>
+                            <div class="layui-input-block">
+                                <input type="hidden" name="switch_shortvideo_check" value="{$config_pri.switch_shortvideo_check}">
+                                <input type="checkbox" {if $config_pri.switch_shortvideo_check}checked=""{/if} lay-skin="switch" lay-text="开启|关闭" lay-filter="switch_shortvideo_check">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">动态审核开关</label>
+                            <div class="layui-input-block">
+                                <input type="hidden" name="switch_moment_check" value="{$config_pri.switch_moment_check}">
+                                <input type="checkbox" {if $config_pri.switch_moment_check}checked=""{/if} lay-skin="switch" lay-text="开启|关闭" lay-filter="switch_moment_check">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">微信开放平台APPID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="wx_appid" value="{$config_pri.wx_appid}" class="layui-input" placeholder="" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">微信开放平台SECRET</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="wx_secret" value="{$config_pri.wx_secret}" class="layui-input" placeholder="" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">UNIVERSAL_LINK</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="universal_link" value="{$config_pri.universal_link}" class="layui-input" placeholder="" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">QQ互联APPID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qq_appid" value="{$config_pri.qq_appid}" class="layui-input" placeholder="" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">QQ互联APPKEY</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qq_appkey" value="{$config_pri.qq_appkey}" class="layui-input" placeholder="" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云APP_ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qcloud_appid" value="{$config_pri.qcloud_appid}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云SECRET_ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qcloud_secretid" value="{$config_pri.qcloud_secretid}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云SECRET_KEY</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qcloud_secretkey" value="{$config_pri.qcloud_secretkey}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云短信APP_ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qsms_appid" value="{$config_pri.qsms_appid}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云短信APP_KEY</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qsms_appkey" value="{$config_pri.qsms_appkey}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云短信模板ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qsms_tplid" value="{$config_pri.qsms_tplid}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云短信签名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qsms_sign" value="{$config_pri.qsms_sign}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云存储BUCKET</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cos_bucket" value="{$config_pri.cos_bucket}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云存储REGION</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cos_region" value="{$config_pri.cos_region}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云存储APP授权文件夹</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cos_appfolder" value="{$config_pri.cos_appfolder}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云存储图片存放文件夹</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cos_folder_image" value="{$config_pri.cos_folder_image}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云存储模糊图片存放文件夹</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cos_folder_blurimage" value="{$config_pri.cos_folder_blurimage}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云IM APPID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="im_sdkappid" value="{$config_pri.im_sdkappid}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云IM SECRET</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="im_sdksecret" value="{$config_pri.im_sdksecret}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云IM管理员</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="txim_admin" value="{$config_pri.txim_admin}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云IM广播账号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="txim_broadcast" value="{$config_pri.txim_broadcast}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云推流地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="push_domain" value="{$config_pri.push_domain}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云播流地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="pull_domain" value="{$config_pri.pull_domain}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">腾讯云推流防盗链Key</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="push_key" value="{$config_pri.push_key}" class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">美颜渠道</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="beauty_channel" value="0" title="基础美颜" {if $config_pri.beauty_channel == 0}checked{/if}>
+                                <input type="radio" name="beauty_channel" value="1" title="拓幻美颜" {if $config_pri.beauty_channel == 1}checked{/if}>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">TiSDK Key</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tisdk_key" value="{$config_pri.tisdk_key}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">ShareSDK AppKey</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="sharesdk_appkey" value="{$config_pri.sharesdk_appkey}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">ShareSDK AppSecret</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="sharesdk_appsecret" value="{$config_pri.sharesdk_appsecret}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">极光推送app_key</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="jpush_appkey" value="{$config_pri.jpush_appkey}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">极光推送master_seckey</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="jpush_master_secret" value="{$config_pri.jpush_master_secret}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">苹果内购</label>
+                            <div class="layui-input-block">
+                                <input type="hidden" name="switch_iap" value="{$config_pri.switch_iap}">
+                                <input type="checkbox" {if $config_pri.switch_iap}checked=""{/if} lay-skin="switch" lay-text="开启|关闭" lay-filter="switch_iap">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">微信支付商户ID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="wx_mchid" value="{$config_pri.wx_mchid}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">微信支付Key</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="wx_key" value="{$config_pri.wx_key}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝APPID</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alipay_appid" value="{$config_pri.alipay_appid}" class="layui-input" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝私钥</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" class="layui-textarea" name="alipay_prikey">{$config_pri.alipay_prikey}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付宝公钥</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" class="layui-textarea" name="alipay_pubkey">{$config_pri.alipay_pubkey}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">支付回调域名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="pay_notify_domain" value="{$config_pri.pay_notify_domain}" class="layui-input" placeholder="http或https开头" lay-verify="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">钻石人民币汇率</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="exchange_rate" value="{$config_pri.exchange_rate}" class="layui-input" lay-verify="required" placeholder="请填写1~100整数">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">%</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">单次最低提现金额</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="withdraw_min" value="{$config_pri.withdraw_min}" class="layui-input" lay-verify="required" placeholder="请填写1~100整数">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">元</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">上级代理返佣比例</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="agent_ratio" value="{$config_pri.agent_ratio}" class="layui-input" lay-verify="required" placeholder="请填写1~100整数">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">%</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form" wid200="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">商户提现手续费</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="shop_commission" value="{$config_pri.shop_commission}" class="layui-input" lay-verify="required" placeholder="0-100">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">%</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">快递100授权KEY</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="kuaidi100_key" value="{$config_pri.kuaidi100_key}" class="layui-input" lay-verify="required" placeholder="快递100授权KEY">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">快递100customer</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="kuaidi100_customer" value="{$config_pri.kuaidi100_customer}" class="layui-input" lay-verify="required" placeholder="快递100customer">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="configpri-save">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'setting']);
+</script>
+</body>
+</html>
